@@ -1,98 +1,69 @@
-#  Horizon 🚀 - E-commerce Website for Gamers.
+# 🛡️ HORIZON - Nền tảng Thương mại Điện tử Tactical Cao cấp
 
-![Horizon Showcase]([link_den_anh_banner_dep_nhat_cua_ban])
+[![Live Demo](https://img.shields.io/badge/demo-os--horizon.site-blue?style=for-the-badge&logo=google-chrome&logoColor=white)](https://os-horizon.site/)
+[![Platform](https://img.shields.io/badge/.NET-8.0-512bd4?style=for-the-badge&logo=dotnet)](https://dotnet.microsoft.com/)
+[![Database](https://img.shields.io/badge/SQL_Server-2022-cc2927?style=for-the-badge&logo=microsoft-sql-server)](https://www.microsoft.com/en-us/sql-server/)
 
-**Horizon** is a final-term project, a fully functional e-commerce web application built in 10 days using ASP.NET Core 8. The project is designed for selling gaming consoles, game discs, and accessories, with a unique UI/UX inspired by the high-tech, dark-mode aesthetic of the Binance trading platform.
+## 📝 Giới thiệu
+**Horizon** là một hệ thống thương mại điện tử (B2C) hoàn chỉnh, tập trung vào thị trường ngách là thiết bị Gaming và phụ kiện phong cách Tactical. Dự án được xây dựng với mục tiêu không chỉ tạo ra một giao diện mua sắm độc đáo mà còn tích hợp các chiến lược vận hành thực tế: từ bảo mật thanh toán, tối ưu hóa SEO đến quản trị kho vận dựa trên dữ liệu.
 
----
-
-## ✨ Key Features
-
-The application is architected with a clean separation between the customer-facing storefront and the powerful admin panel, utilizing ASP.NET Core's **Areas**.
-
-### 👤 Customer Area
-
-- **Themed UI/UX:** A complete visual overhaul inspired by Binance, featuring a dark-mode interface with a black and gold accent color palette for a premium, modern feel.
-- **Interactive Homepage:**
-    - Displays curated sections for **Featured Collections**, **On Sale Items**, and **Newest Arrivals**.
-    - A unique **Chibi Animation Stage** where animated characters patrol. Clicking on a character reveals a dialogue box.
-    - **Background Music Player** with a toggle button to enhance the immersive experience.
-- **Seamless Shopping Flow:**
-    - **Product Browsing:** A dedicated Shop page to view all products.
-    - **Related Products:** The product details page suggests other items from the same category to encourage further exploration.
-    - **Shopping Cart:** Fully functional cart using `Session` storage, allowing users to add, update quantities, and remove items.
-    - **Order Placement:** A secure checkout process that requires authentication, records the order in the database, and updates product stock in real-time.
-- **User Authentication:**
-    - Secure user Registration and Login system powered by ASP.NET Core Identity.
-    - Custom-designed, visually appealing Login and Register pages with animated video backgrounds.
-- **Live Interaction:** Integrated **Tawk.to** live chat widget for instant customer support.
-
-### 🔐 Admin Area
-
-- **Secure & Role-Based Access:** The entire admin panel is protected. Only users with the "Admin" role can access its functionalities.
-- **Comprehensive Dashboard:**
-    - **At-a-glance Statistics:** Displays key metrics like Total Revenue, Total Orders, Total Products, and Total Customers.
-    - **Data Visualization:** Utilizes **Chart.js** to render interactive charts: a doughnut chart for product distribution by category and a bar chart for daily revenue over the last 7 days.
-- **Content Management (CRUD):**
-    - **Product Management:** Full CRUD capabilities for products, including a flexible image uploader (local file or external URL).
-    - **Category Management:** Full CRUD for product categories.
-    - **Order Management:** A dedicated interface for admins to view all customer orders, check details, and update their status (e.g., from "Processing" to "Shipped").
-- **Advanced Filtering:** Admins can filter the order list by month and year to easily track past transactions.
+> **Slogan:** *"Walk Past The Horizon."*
 
 ---
 
-## 🛠️ Technology Stack
+## 🚀 Tính năng Chiến lược (Core Features)
 
-| Category | Technology / Tool |
+### 1. Vận hành & Thanh toán (E-commerce Core)
+*   **Thanh toán VnPay Protocol:** Tích hợp cổng thanh toán quốc gia, tự động hóa quy trình xác thực, trừ kho thời gian thực và lưu nhật ký giao dịch (`Transactions`).
+*   **Quản trị kho vận (Inventory Logs):** Hệ thống `Product Receipts` ghi nhận giá vốn và lịch sử nhập hàng, cho phép tính toán lợi nhuận ròng chính xác.
+*   **Hệ thống Giỏ hàng (Cargo Manifest):** Sử dụng **Session JSON Serialization** để tối ưu hiệu suất và lưu trữ đối tượng phức tạp.
+
+### 2. Digital Marketing & SEO Tối ưu
+*   **URL Friendly (Slug):** Tự động hóa quy trình sinh Slug chứa từ khóa từ tên sản phẩm, tối ưu cho bộ máy tìm kiếm Google.
+*   **Social Marketing:** Triển khai **Open Graph (OG Tags)** cho phép hiển thị ảnh, giá và mô tả chuyên nghiệp khi chia sẻ lên Facebook/Zalo.
+*   **Email Marketing:** Tích hợp **Mailchimp** để thu thập dữ liệu khách hàng (Lead Generation) và triển khai các chiến dịch "Intel Briefing".
+
+### 3. Trải nghiệm người dùng & CRM
+*   **QRF Support (Livechat):** Nhúng hệ thống **Tawk.to** hỗ trợ khách hàng 24/7 theo thời gian thực.
+*   **Phân tích hành vi:** Sử dụng **Google Analytics 4 (GA4)** để giám sát luồng truy cập và tối ưu hóa phễu bán hàng.
+*   **Giao diện Modern Light:** Thiết kế tối giản, tập trung vào sản phẩm, đảm bảo tốc độ phản hồi nhanh (< 2s).
+
+---
+
+## 🛠️ Tech Stack (Hệ thống Khí tài)
+
+| Thành phần | Công nghệ triển khai |
 | :--- | :--- |
-| **Backend** | .NET 8, ASP.NET Core 8 MVC, ASP.NET Core Identity, Entity Framework Core 8 |
-| **Frontend** | HTML5, CSS3, JavaScript, Bootstrap 5, Chart.js, jQuery |
-| **Database** | Microsoft SQL Server |
-| **Dev Tools** | Visual Studio 2022, Git & GitHub, IIS Express |
-| **Third-party**| Tawk.to Live Chat |
+| **Backend** | C# / ASP.NET Core 8.0 (MVC) |
+| **ORM** | Entity Framework Core 8 (Code-First) |
+| **Identity** | ASP.NET Core Identity (Role-based Authorization) |
+| **Frontend** | Bootstrap 5, CSS3 Variables, JavaScript, Chart.js |
+| **Dịch vụ 3rd Party** | VnPay Gateway, Mailchimp, Tawk.to, GA4 |
+| **Hạ tầng Cloud** | SmarterASP Hosting, TenTen DNS, SSL (Let's Encrypt) |
 
 ---
 
-## ⚙️ Setup and Installation
-
-To run this project locally, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/Horizon.git
-    ```
-2.  **Open the project** in Visual Studio 2022.
-3.  **Configure the Connection String:**
-    - Open the `appsettings.json` file.
-    - Modify the `DefaultConnection` string under `ConnectionStrings` to match your local SQL Server instance.
-4.  **Create and Seed the Database:**
-    - Open the **Package Manager Console**.
-    - Run the command: `Update-Database`. This will create the database and all necessary tables.
-5.  **Run the application:**
-    - Press `F5` or the "Start Debugging" button.
-    - The application will automatically seed the database with "Admin" and "Customer" roles, and a default admin account will be created.
+## 🏗️ Kiến trúc Hệ thống
+Dự án áp dụng cấu trúc **Areas** để tách biệt luồng nghiệp vụ quản trị và khách hàng:
+- **`Area/Admin`**: Trung tâm điều hành (Dashboard, Thống kê doanh thu, Quản lý kho, Cập nhật trạng thái đơn hàng).
+- **`Area/Customer`**: Cửa hàng trực tuyến (Tìm kiếm, Bộ lọc Sidebar, Luồng Checkout bảo mật).
+- **`Infrastructure`**: Chứa các bộ Helper nâng cao (`SlugHelper`, `VnPayLibrary`, `SessionExtensions`).
 
 ---
 
-### 🔑 Default Admin Account
-
--   **Email:** `admin@horizon.com`
--   **Password:** `Admin@123`
+## 👨‍💻 Kỹ năng đúc kết (Key Learnings)
+- Làm chủ quy trình phát triển sản phẩm từ ý tưởng đến triển khai Cloud (**End-to-End Development**).
+- Tư duy thiết kế Cơ sở dữ liệu quan hệ chặt chẽ cho các hệ thống giao dịch tài chính.
+- Kỹ năng tích hợp và xử lý API/SDK từ các bên thứ ba chuyên nghiệp.
+- Tối ưu hóa hiệu năng ứng dụng và bảo mật Web theo tiêu chuẩn OWASP.
 
 ---
 
-## 📸 Screenshots
+## 📞 Thông tin Liên hệ
+- **Họ và tên:** [Trần Đăng Khoa]
+- **Email:** [khoatran04.it@gmail.com]
+- **Tên miền dự án:** [https://os-horizon.site/](https://os-horizon.site/)
+- **LinkedIn:** []
 
-*(This is the perfect place to showcase your hard work!)*
-
-**Customer Homepage**
-![Customer Homepage]([link_den_anh_trang_chu])
-
-**Product Details Page**
-![Product Details Page]([link_den_anh_trang_chi_tiet])
-
-**Admin Dashboard**
-![Admin Dashboard]([link_den_anh_dashboard])
-
-**Shopping Cart**
-![Shopping Cart]([link_den_anh_gio_hang])
+---
+*© 2025 Horizon Project - Built with passion and code.*
