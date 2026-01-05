@@ -1,0 +1,55 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center align-items-center my-5">
+
+    @* --- CỘT BÊN TRÁI: FORM ĐĂNG KÝ --- *@
+    <div class="col-md-5">
+        <h1>@ViewData["Title"]</h1>
+        <h4>Create a new account.</h4>
+        <hr class="border-warning" />
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.Password">Password</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="d-grid">
+                <button id="registerSubmit" type="submit" class="btn btn-lg btn-primary">Register</button>
+            </div>
+            <div class="text-center mt-3">
+                <p>
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Already have an account? Log in</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    @* --- CỘT BÊN PHẢI: KHUNG CHỨA VIDEO --- *@
+    <div class="col-md-7 d-none d-md-block">
+        <video class="w-100 rounded shadow" autoplay loop muted playsinline>
+            @* Sử dụng lại cùng một video hoặc một video khác nếu bạn muốn *@
+            <source src="~/videos/Nanomachines-danya!.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

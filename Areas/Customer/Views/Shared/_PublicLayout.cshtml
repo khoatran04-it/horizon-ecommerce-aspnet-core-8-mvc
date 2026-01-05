@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T46Q9G7K78"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-T46Q9G7K78');
+    </script>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | Horizon Gaming Gear</title>
+
+    @* --- Google Fonts & Bootstrap Icons --- *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    @* --- Stylesheets --- *@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/gfl-style.css" asp-append-version="true" />
+
+    @* Render các thẻ Meta SEO từ từng trang cụ thể *@
+    @await RenderSectionAsync("HeaderMetas", required: false)
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light text-dark">
+
+    <header class="main-header sticky-top">
+        @* --- Top Announcement Bar --- *@
+        <div class="top-bar py-2 text-center small fw-medium bg-light border-bottom">
+            🚀 Walk Past The Horizon - Premium Tactical Gear
+        </div>
+
+        @* --- Main Navbar --- *@
+        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+            <div class="container">
+                @* Logo: Fix lỗi routing bằng asp-area="Customer" *@
+                <a class="navbar-brand fs-3 fw-bold text-primary" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    HORI<span class="text-dark">ZON</span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navContent">
+                    @* Ô Tìm kiếm trung tâm *@
+                    <form class="mx-lg-auto d-flex w-50 search-group" asp-area="Customer" asp-controller="Products" asp-action="Shop" method="get">
+                        <div class="input-group">
+                            <input type="text" name="searchString" class="form-control border-secondary-subtle" placeholder="Search for gear...">
+                            <button class="btn btn-primary px-3" type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </form>
+
+                    <ul class="navbar-nav ms-auto align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" asp-area="Customer" asp-controller="Products" asp-action="Shop">Shop</a>
+                        </li>
+
+                        @* Giỏ hàng ViewComponent *@
+                        <li class="nav-item mx-2 position-relative">
+                            @await Component.InvokeAsync("Cart", this.Context)
+                        </li>
+
+                        @* Partial đăng nhập *@
+                        <partial name="_LoginPartial" />
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    @* --- Main Content Area --- *@
+    <main class="flex-grow-1 container py-5">
+        @* Hiển thị thông báo hệ thống *@
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["Info"] != null)
+        {
+            <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                <i class="bi bi-info-circle-fill me-2"></i> @TempData["Info"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @RenderBody()
+    </main>
+
+
+    @* --- Professional Footer --- *@
+    <footer class="main-footer bg-white border-top py-5 mt-auto">
+        <div class="container">
+            <div class="row g-4">
+                @* Cột 1: Brand & Social *@
+                <div class="col-lg-4">
+                    <a class="navbar-brand fs-3 fw-bold text-primary mb-3 d-block" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                        HORIZON
+                    </a>
+                    <p class="text-muted small pe-lg-5">
+                        Horizon Gaming Gear - Cung cấp trang bị tác chiến cao cấp cho các chỉ huy hiện đại.
+                        An toàn, tin cậy và không bao giờ phản bội nhiệm vụ.
+                    </p>
+                    <div class="d-flex gap-3 fs-5 mt-3">
+                        <a href="#" class="text-primary"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-dark"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="text-danger"><i class="bi bi-youtube"></i></a>
+                        <a href="#" class="text-info"><i class="bi bi-discord"></i></a>
+                    </div>
+                </div>
+
+                @* Cột 2: Navigation *@
+                <div class="col-6 col-lg-2">
+                    <h6 class="fw-bold mb-4 text-dark text-uppercase small tracking-widest">Navigation</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none hover-link">Home Base</a></li>
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="Products" asp-action="Shop" class="text-muted text-decoration-none hover-link">Arsenal (Shop)</a></li>
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="Home" asp-action="About" class="text-muted text-decoration-none hover-link">The Mission</a></li>
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index" class="text-muted text-decoration-none hover-link">Cargo (Cart)</a></li>
+                    </ul>
+                </div>
+
+                @* Cột 3: Support *@
+                <div class="col-6 col-lg-3">
+                    <h6 class="fw-bold mb-4 text-dark text-uppercase small tracking-widest">Support QRF</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="Home" asp-action="Contact" class="text-muted text-decoration-none hover-link">Contact Support</a></li>
+                        <li class="mb-2"><a asp-area="Customer" asp-controller="Home" asp-action="Privacy" class="text-muted text-decoration-none hover-link">Privacy Protocol</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-link">Terms of Engagement</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none hover-link">Shipping Status</a></li>
+                    </ul>
+                </div>
+
+                @* Cột 4: Mailchimp Intel Subscription *@
+                <div class="col-lg-3">
+                    <h6 class="fw-bold mb-4 text-dark text-uppercase small tracking-widest">Intel Subscription</h6>
+                    <p class="text-muted small">Nhận thông báo về các chuyến hàng (Supply Drop) mới nhất.</p>
+
+                    <div id="mc_embed_signup">
+                        <form action="https://gmail.us9.list-manage.com/subscribe/post?u=74189278498654c2794fd7532&amp;id=042c39385b&amp;f_id=0090ece3f0"
+                              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                            <div class="input-group mb-2 shadow-sm">
+                                <input type="email" name="EMAIL" class="form-control border-0 bg-light small required email" id="mce-EMAIL" placeholder="Operative Email" required>
+                                <button class="btn btn-primary fw-bold" type="submit" id="mc-embedded-subscribe">JOIN</button>
+                            </div>
+                            @* Trường ẩn chống Bot của Mailchimp *@
+                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                <input type="text" name="b_74189278498654c2794fd7532_042c39385b" tabindex="-1" value="">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-text mt-1" style="font-size: 0.65rem;">*Dữ liệu được bảo mật bởi Horizon Protocol.</div>
+                </div>
+            </div>
+
+            @* Copyright *@
+            <div class="border-top mt-5 pt-4 text-center">
+                <p class="text-muted small mb-0">
+                    &copy; @DateTime.Now.Year <span class="fw-bold text-dark">HORIZON TACTICAL SUPPLY</span>.
+                    Tất cả các giao thức được bảo vệ.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    @* --- Music & Control --- *@
+    <audio id="bg-music" loop>
+        <source src="~/audio/background-music.mp3" type="audio/mpeg">
+    </audio>
+    <div id="music-control" title="Toggle Music">🔇</div>
+
+    @* --- Scripts --- *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @* Mailchimp Validation Script *@
+    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+    <script type="text/javascript">
+        (function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';}(jQuery));var $mcj = jQuery.noConflict(true);
+    </script>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    @* --- Tawk.to Live Chat (QRF Support) --- *@
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/689c5078ed02831924d200f2/1j2hagn1v';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+</body>
+</html>
+
+<style>
+    /* CSS bổ sung để Layout mượt mà hơn */
+    .hover-link:hover {
+        color: var(--primary-color) !important;
+        padding-left: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .tracking-widest {
+        letter-spacing: 0.15em;
+    }
+
+    /* Tùy chỉnh nút nhạc */
+    #music-control {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 45px;
+        height: 45px;
+        background: var(--primary-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        font-size: 20px;
+    }
+
+        #music-control.muted {
+            background: #6c757d;
+        }
+</style>
