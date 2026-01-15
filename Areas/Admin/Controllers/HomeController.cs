@@ -34,7 +34,7 @@ namespace Horizon.Areas.Admin.Controllers
                 TotalUsers = await _userManager.Users.CountAsync() // Đếm tổng số người dùng
             };
 
-            // --- 2. Lấy danh sách sản phẩm có tồn kho thấp ---
+            // --- 2. Lấy danh sách sản phẩm có tồn kho thấp nhất ---
             viewModel.LowStockProducts = await _context.Products
                 .AsNoTracking()
                 .Where(p => p.Quantity <= 5) // Điều kiện: số lượng còn lại <= 5
